@@ -27,10 +27,10 @@ function creation_liste_pays(){
     $listePays = ["France","États-Unis", "Canada", "Argentine", "Chili", "Belgique", "Maroc", "Mexique", "Japon", "Italie", "Islande", "Chine", "Grèce", "Suisse"];
     $menu = '<ul class="pays-menu">';
     foreach ($listePays as $pays) {
-        $menu .= '<li><a href="#" data-country-name="' . $pays . '">' . $pays . '</a></li>';
+        $menu .= '<li><button href="#" data-country-name="' . $pays . '">' . $pays . '</button></li>';
     }
     $menu .= '</ul>';
-    $contenu = '<button class="bouton__ouvrir">Ouvrir</button>' . $menu . '<div class="contenu__restapi__pays"></div>';
+    $contenu = $menu . '<div class="contenu__restapi__pays"></div>';
     return $contenu;
 }
 
