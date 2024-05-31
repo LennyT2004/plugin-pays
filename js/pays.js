@@ -2,10 +2,10 @@
     console.log("rest API");
 
     // Add event listener to country menu links
-    document.querySelectorAll(".pays-menu-unique a").forEach(link => {
+    document.querySelectorAll(".pays-menu a").forEach(link => {
         link.addEventListener("click", event => {
             event.preventDefault();
-            let countryName = event.target.getAttribute("data-country-name-unique");
+            let countryName = event.target.getAttribute("data-country-name");
 
             // URL of the WordPress REST API
             let url = `https://gftnth00.mywhc.ca/tim28/wp-json/wp/v2/posts?search=${countryName}`;
@@ -26,7 +26,7 @@
                 .then(function (data) {
                     // The "data" variable contains the JSON response
                     console.log(data);
-                    let restapi = document.querySelector(".contenu__restapi");
+                    let restapiPays = document.querySelector(".contenu__restapi__pays");
                     restapi.innerHTML = ""; // Clear the previous posts
 
                     // Now, you can process the data as you wish
@@ -36,13 +36,13 @@
                         let contenu = article.content.rendered;
                         console.log(titre);
                         let carte = document.createElement("div");
-                        carte.classList.add("restapi__carte");
+                        carte.classList.add("restapi__carte__pays");
 
                         carte.innerHTML = `
                             <h2>${titre}</h2>
                             <p>${contenu}</p>
                         `;
-                        restapi.appendChild(carte);
+                        restapiPays.appendChild(carte);
                     });
                 })
                 .catch(function (error) {

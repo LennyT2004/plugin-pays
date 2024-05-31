@@ -6,20 +6,32 @@ Version: 1.0
 Author: Lenny Tran
 */
 
-function creation_destinations(){
+function eddym_enqueue_voyage()
+{
+    $version_css = filemtime(plugin_dir_path( __FILE__ ) . "style.css");
+    $version_js = filemtime(plugin_dir_path(__FILE__) . "js/pays.js");
+    wp_enqueue_style(   'em_plugin_voyage_css',
+                        plugin_dir_url(__FILE__) . "style.css",
+                        array(),
+                        $version_css);
+
+    wp_enqueue_script(  'em_plugin_voyage_js',
+                        plugin_dir_url(__FILE__) ."js/voyage.js",
+                        array(),
+                        $version_js,
+                        true);
+}
+add_action('wp_enqueue_scripts', 'eddym_enqueue_voyage');
+
+function creation_liste_pays(){
     $listePays = ["France","États-Unis", "Canada", "Argentine", "Chili", "Belgique", "Maroc", "Mexique", "Japon", "Italie", "Islande", "Chine", "Grèce", "Suisse"];
-    $menu = '<ul class="pays-menu-unique">';
+    $menu = '<ul class="pays-menu">';
     foreach ($listePays as $pays) {
-        $menu .= '<li><a href="#" data-country-name-unique="' . $pays . '">' . $pays . '</a></li>';
+        $menu .= '<li><a href="#" data-country-name="' . $pays . '">' . $pays . '</a></li>';
     }
     $menu .= '</ul>';
-    $contenu = '<button class="bouton__ouvrir-unique">Ouvrir</button>' . $menu . '<div class="contenu__restapi-unique"></div>';
+    $contenu = '<button class="bouton__ouvrir">Ouvrir</button>' . $menu . '<div class="contenu__restapi__pays"></div>';
     return $contenu;
 }
 
-function enqueue_scripts() {
-    wp_enqueue_script('my-script', plugin_dir_url(__FILE__) . 'js/pays.js', array(), '1.0.0', true);
-}
-add_action('wp_enqueue_scripts', 'enqueue_scripts');
-
-add_shortcode('em_pays', 'creation_destinations');
+add_shortcode('em_pays', 'creation_liste_pays');
